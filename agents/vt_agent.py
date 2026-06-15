@@ -1,5 +1,6 @@
 import os
 import requests
+from agents.abuseipdb_agent import ABUSEIPDB_API_KEY
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,6 +9,9 @@ VT_API_KEY = os.getenv("VIRUSTOTAL_API_KEY")
 
 
 def check_virustotal(ioc, ioc_type):
+
+    if not VT_API_KEY:
+        return {"ioc": ioc, "error": "Missing VirusTotal API key"}
     """
     ioc_type: 'url', 'ip', or 'domain'
     """
