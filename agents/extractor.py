@@ -4,7 +4,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-llm = ChatGroq(api_key=os.getenv("GROQ_API_KEY"), model_name="llama-3.3-70b-versatile")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+if not GROQ_API_KEY:
+    raise ValueError("Missing GROQ_API_KEY in .env file")
+
+llm = ChatGroq(api_key=GROQ_API_KEY, model_name="llama-3.3-70b-versatile")
 
 
 def extract_iocs(email_text):

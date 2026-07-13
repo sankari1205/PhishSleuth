@@ -9,6 +9,8 @@ URLSCAN_API_KEY = os.getenv("URLSCAN_API_KEY")
 
 
 def check_urlscan(url):
+    if not URLSCAN_API_KEY:
+        return {"url": url, "error": "Missing URLScan API key"}
 
     headers = {"API-Key": URLSCAN_API_KEY, "Content-Type": "application/json"}
 
